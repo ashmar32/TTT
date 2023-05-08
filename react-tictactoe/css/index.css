@@ -54,8 +54,51 @@ body {
 
 .turn {
   background-color: greenyellow;
+  /* grid alignment */
   grid-column-start: 1;
   grid-column-end: 3;
+  align-self: center;
+
+  /* how content within the container will be aligned */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* setting animation for icon */
+@keyframes turn-icon-animation {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.turn i {
+  font-size: 1.8rem;
+  margin-left: 10px;
+  animation: 0.6s ease-in-out turn-icon-animation;
+}
+
+/* setting animation for text */
+@keyframes turn-text-animation {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateX(0);
+  }
+}
+
+.turn p {
+  font-size: 14px;
+  animation: 0.6s ease-in-out turn-text-animation;
 }
 
 .square {
