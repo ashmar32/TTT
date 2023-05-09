@@ -8,6 +8,10 @@ const App = {
     squares: document.querySelectorAll('[data-id="square"]'),
   },
 
+  state: {
+    currentPlayer: 1,
+  },
+
   init() {
     App.registerEventListeners();
   },
@@ -29,6 +33,28 @@ const App = {
     App.$.squares.forEach((square) => {
       square.addEventListener("click", (event) => {
         console.log("this is the id of the square clicked: ", event.target.id);
+        console.log("this is the current player: ", App.state.currentPlayer);
+
+        // check to see if there has been a move made in picked square
+        if (square.hasChildNodes()) {
+          return;
+        }
+
+        // determine which icon to add to the square
+        const currentPlayer = App.state.currentPlayer;
+        const icon = document.createElement("i");
+
+        if (currentPlayer === 1) {
+          icon.classList.add("fa-solid", "fa-x", "turquoise");
+        } else {
+          icon.classList.add("fa-solid", "fa-o", "yellow");
+        }
+        // resetting current player after each turn
+        App.state.currentPlayer = App.state.currentPlayer === 1 ? 2 : 1;
+        // adding icon to selected square per turn
+        square.replaceChildren(icon);
+
+        // check if game is a win or tie
       });
     });
   },
