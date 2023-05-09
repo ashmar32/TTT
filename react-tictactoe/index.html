@@ -27,35 +27,46 @@
             <i class="fa-solid fa-chevron-down"></i>
           </button>
 
-          <!-- <div class="items border hidden" data-id="actions-items">
+          <div class="items border hidden" data-id="actions-items">
             <button data-id="reset-btn">Reset</button>
             <button data-id="new-round-btn">New Round</button>
-          </div> -->
+          </div>
         </div>
 
         <!-- gameboard -->
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
+        <div class="square shadow"></div>
+        <div class="square shadow"></div>
+        <div class="square shadow"></div>
+        <div class="square shadow"></div>
+        <div class="square shadow"></div>
+        <div class="square shadow"></div>
+        <div class="square shadow"></div>
+        <div class="square shadow"></div>
+        <div class="square shadow"></div>
 
-        <!-- scoreboard -->
-        <div class="score"></div>
-        <div class="score"></div>
-        <div class="score"></div>
+        <!-- Scoreboard -->
+        <div class="score shadow" style="background-color: var(--turquoise)">
+          <p>Player 1</p>
+          <span data-id="p1-wins">0 Wins</span>
+        </div>
+        <div class="score shadow" style="background-color: var(--light-gray)">
+          <p>Ties</p>
+          <span data-id="ties">0</span>
+        </div>
+        <div class="score shadow" style="background-color: var(--yellow)">
+          <p>Player 2</p>
+          <span data-id="p2-wins">0 Wins</span>
+        </div>
       </div>
     </main>
+
     <footer>
       <p>
         Original project by
         <a href="https://twitter.com/megfdev">@megfdev</a> and
         <a href="https://twitter.com/Ivan00sto">@Ivan00Sto</a>
       </p>
+
       <p>
         Refactored by
         <a href="https://github.com/ashmar32" style="color: var(--turquoise)"
@@ -63,5 +74,12 @@
         >
       </p>
     </footer>
+    <!-- Modal that opens when game ends -->
+    <div class="modal hidden" data-id="modal">
+      <div class="modal-contents">
+        <p data-id="modal-text">Player 1 wins!</p>
+        <button data-id="modal-btn">Play again</button>
+      </div>
+    </div>
   </body>
 </html>
