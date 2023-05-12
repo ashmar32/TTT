@@ -9,7 +9,7 @@ const App = {
   },
 
   state: {
-    currentPlayer: 1,
+    moves: [],
   },
 
   init() {
@@ -32,16 +32,33 @@ const App = {
 
     App.$.squares.forEach((square) => {
       square.addEventListener("click", (event) => {
-        console.log("this is the id of the square clicked: ", event.target.id);
-        console.log("this is the current player: ", App.state.currentPlayer);
-
         // check to see if there has been a move made in picked square
-        if (square.hasChildNodes()) {
+        const moveCheck = (squareId) => {
+          const existingMove = App.state.moves.find(
+            (move) => move.squareId === squareId
+          );
+          return existingMove !== undefined;
+        };
+
+        if (moveCheck(square.id)) {
           return;
         }
 
         // determine which icon to add to the square
-        const currentPlayer = App.state.currentPlayer;
+
+        // grabbing the last move from the array
+        // const lastMove = App.state.moves[App.state.moves.length - 1]
+
+        // this is the short had version of above
+        const lastMove = App.state.moves.at(-1);
+
+        // get opposite player from last move to make next player
+        const getOppositePlayer = (playerId) => (playerId === 1 ? 2 : 1);
+
+        const currentPlayer =
+          App.state.moves.length === 0
+            ? 1
+            : getOppositePlayer(lastMove.playerId);
         const icon = document.createElement("i");
 
         if (currentPlayer === 1) {
@@ -49,8 +66,16 @@ const App = {
         } else {
           icon.classList.add("fa-solid", "fa-o", "yellow");
         }
+
+        App.state.moves.push({
+          squareId: square.id,
+          playerId: currentPlayer,
+        });
         // resetting current player after each turn
-        App.state.currentPlayer = App.state.currentPlayer === 1 ? 2 : 1;
+        App.state.currentPlayer = currentPlayer === 1 ? 2 : 1;
+
+        console.log(App.state);
+
         // adding icon to selected square per turn
         square.replaceChildren(icon);
 
